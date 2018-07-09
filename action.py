@@ -151,7 +151,9 @@ def dragged():
 	paper = Paper()
 	if dragged_type == 'text':
 		for item in items:
-			if item.indexof('http://') == 0 or item.indexof('https://') == 0:
+			if item.find('http://') == 0 or item.find('https://') == 0:
+				paper.add_url(item)
+			else:
 				paper.add_txt(item)
 	else:
 		def get_extname(path):
