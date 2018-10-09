@@ -197,6 +197,7 @@ def dragged():
 	print(paper.encode())
 	paper_id = print_paper(MEMOBIRD_ACCESS_KEY, MEMOBIRD_DEVICE_ID, user_id, paper.encode())
 	dz.finish("Task Complete")
+	dz.url(False)
 
 	# You should always call dz.url or dz.text last in your script. The below dz.text line places text on the clipboard.
 	# If you don't want to place anything on the clipboard you should still call dz.url(false)
