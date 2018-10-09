@@ -1,6 +1,6 @@
 #!/bin/bash
 cd "`dirname "$0"`"
-pip install -r requirements.txt --target ./packages
+pip3 install -r requirements.txt --target ./packages
 if [ -d packages ]; then
 	cd packages
 	find . -name "*.pyc" -delete
