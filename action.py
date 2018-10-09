@@ -174,6 +174,21 @@ def dragged():
 				url = readPlist(path)['URL']
 				print(url)
 				paper.add_url(url)
+			elif extname == 'pdf':
+				# $PATH in Dropzone script set to "/usr/bin:/bin:/usr/sbin:/sbin",
+				# but poppler usually install to /usr/local/bin/
+				__import__('os').environ['PATH'] += ':/usr/local/bin/'
+				try:
+					pdf2image = __import__('pdf2image')
+					images = pdf2image.convert_from_path(path)
+				except Exception as e:
+					info = 'Can`t call module pdf2image.'
+					info += '\nTo print pdf, you need install poppler-utils. See:'
+					info += '\nhttp://macappstore.org/poppler/'
+					info += '\n\n' + repr(e)
+					dz.error('Error', info)
+				for image in images:
+					paper.add_img_data(image)
 			else:
 				dz.error('Error', '{} Can\'t be print.'.format(path))
 
